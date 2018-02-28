@@ -2,17 +2,17 @@ import React from "react";
 import { render } from "react-dom";
 import Slider from "./Components/Slider";
 import Reboot from "material-ui/Reboot";
-
 import Paper from "material-ui/Paper";
 
-import Intro from "./Slides/Intro";
-import TOC from "./Slides/TOC";
+import Twitter from "./Twitter";
 
+import Slides from "./Slides";
 const App = () => (
   <div>
     <Reboot />
+    <Twitter />
     <section>
-      {[Intro, TOC].map(Slide => (
+      {Slides.map(Slide => (
         <Paper
           style={{
             textAlign: "center",
@@ -29,7 +29,3 @@ const App = () => (
 );
 
 render(<App />, document.getElementById("root"));
-
-{
-  /* <Slider slides={[<Intro />, <TOC />]} /> */
-}
