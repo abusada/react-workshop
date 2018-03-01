@@ -5,13 +5,13 @@ import Reboot from "material-ui/Reboot";
 import Paper from "material-ui/Paper";
 
 import Twitter from "./Twitter";
-
 import Slides from "./Slides";
+
 const App = () => (
   <div>
     <Reboot />
     <Twitter />
-    <section>
+    {/* <section>
       {Slides.map(Slide => (
         <Paper
           style={{
@@ -24,7 +24,7 @@ const App = () => (
           <Slide />
         </Paper>
       ))}
-    </section>
+    </section> */}
   </div>
 );
 
