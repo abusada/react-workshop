@@ -9,6 +9,7 @@ import { FormControl, FormHelperText } from "material-ui/Form";
 import VisibilityOff from "material-ui-icons/VisibilityOff";
 
 import { CircularProgress } from "material-ui/Progress";
+import Container from "./Container";
 
 export default class Twitter extends React.Component {
   static defaultProps = {
@@ -24,7 +25,7 @@ export default class Twitter extends React.Component {
   }
   reset = () => {
     this.setState({ tweet: "" });
-  }
+  };
   onChange(e) {
     const tweet = e.target.value;
     this.setState({ tweet });
@@ -36,46 +37,48 @@ export default class Twitter extends React.Component {
   }
   render() {
     const { tweet } = this.state;
-    const { maxLength } = this.props;
+    const { maxLength, user } = this.props;
     const percentage = tweet.length / maxLength * 100;
     const isReachedLimit = tweet.length >= maxLength;
     const charactersLeft = maxLength - tweet.length;
     const isCloseToReachLimit = charactersLeft < 20;
 
     return (
-      <form action="" onSubmit={this.onSubmit}>
-        <FormControl fullWidth style={{ marginBottom: 20 }}>
-          <InputLabel>What's Happening</InputLabel>
-          <Input
-            multiline
-            value={tweet}
-            onChange={this.onChange}
-            endAdornment={
-              <InputAdornment position="end">
-                <CircularProgress
-                  variant="determinate"
-                  size={20}
-                  value={percentage}
-                />
-              </InputAdornment>
-            }
-          />
-          {isCloseToReachLimit && (
-            <FormHelperText error={isReachedLimit}>
-              {charactersLeft}
-            </FormHelperText>
-          )}
-        </FormControl>
-        <Button
-          disabled={tweet.length === 0 || isReachedLimit}
-          fullWidth
-          color="primary"
-          variant="raised"
-          type="submit"
-        >
-          Tweet
-        </Button>
-      </form>
+      <Container user={user}>
+        <form action="" onSubmit={this.onSubmit}>
+          <FormControl fullWidth style={{ marginBottom: 20 }}>
+            <InputLabel>What's Happening</InputLabel>
+            <Input
+              multiline
+              value={tweet}
+              onChange={this.onChange}
+              endAdornment={
+                <InputAdornment position="end">
+                  <CircularProgress
+                    variant="determinate"
+                    size={20}
+                    value={percentage}
+                  />
+                </InputAdornment>
+              }
+            />
+            {isCloseToReachLimit && (
+              <FormHelperText error={isReachedLimit}>
+                {charactersLeft}
+              </FormHelperText>
+            )}
+          </FormControl>
+          <Button
+            disabled={tweet.length === 0 || isReachedLimit}
+            fullWidth
+            color="primary"
+            variant="raised"
+            type="submit"
+          >
+            Tweet
+          </Button>
+        </form>
+      </Container>
     );
   }
 }

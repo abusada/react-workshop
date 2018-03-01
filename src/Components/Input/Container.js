@@ -22,7 +22,6 @@ const styles = theme => ({
   },
   actions: {
     display: 'flex',
-    selfAlign: 'flex-end'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -42,29 +41,28 @@ const styles = theme => ({
 class RecipeReviewCard extends React.Component {
   state = { expanded: false };
 
+  handleExpandClick = () => {
+    this.setState({ expanded: !this.state.expanded });
+  };
+
   render() {
-    const { classes, timestamp, tweet, user } = this.props;
-    console.log(this.props);
+    const { user, classes, children } = this.props;
     return (
       <div>
         <Card className={classes.card}>
           <CardHeader
             avatar={
-              <Avatar src={user.photoURL} aria-label="Recipe" className={classes.avatar} />
+              <Avatar 
+                className={classes.avatar}
+                src={user.photoURL}
+            />
             }
             title={ user.displayName }
-            subheader={ timestamp }
+            subheader={user.email}
           />
           <CardContent>
-            <Typography component="p">
-              { tweet }
-            </Typography>
+           { children }
           </CardContent>
-          {/* <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-          </CardActions> */}
         </Card>
       </div>
     );
