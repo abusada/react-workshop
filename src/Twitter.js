@@ -2,7 +2,6 @@ import React from "react";
 import Input from "./Components/Input";
 import Tweet from "./Components/Tweet";
 import Paper from "material-ui/Paper";
-
 import Login from "./Components/Login";
 
 import { getCookie } from "./api/cookies";
@@ -16,12 +15,15 @@ export default class Twitter extends React.Component {
       isLoggedIn: !!cookie
     };
   }
-  onSignupSuccess = (data) => {
+  onSignupSuccess = data => {
     this.setState({
       isLoggedIn: true,
-      user: data,
-    })
-  }
+      user: data
+    });
+  };
+  onTweet = tweet => {
+    alert(tweet);
+  };
   render() {
     const { isLoggedIn, user } = this.state;
     console.log({ isLoggedIn });
@@ -31,7 +33,7 @@ export default class Twitter extends React.Component {
         {isLoggedIn && (
           <div>
             <Paper style={{ padding: 10 }} fullWidth>
-              <Input user={user} />
+              <Input onTweet={this.onTweet} user={user} />
             </Paper>
             <hr />
             <Tweet />

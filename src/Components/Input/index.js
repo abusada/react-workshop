@@ -22,27 +22,26 @@ export default class Twitter extends React.Component {
       tweet: ""
     };
   }
+  reset = () => {
+    this.setState({ tweet: "" });
+  }
   onChange(e) {
     const tweet = e.target.value;
     this.setState({ tweet });
   }
   onSubmit(e) {
-    this.setState({
-      tweet: ""
-    });
     e.preventDefault();
-  }
-  computePercentage() {
-    return this.state.tweet.length / this.props.maxLength * 100;
+    this.props.onTweet(this.state.tweet);
+    this.reset();
   }
   render() {
     const { tweet } = this.state;
     const { maxLength } = this.props;
-    const percentage = this.computePercentage();
+    const percentage = tweet.length / maxLength * 100;
     const isReachedLimit = tweet.length >= maxLength;
     const charactersLeft = maxLength - tweet.length;
     const isCloseToReachLimit = charactersLeft < 20;
-    
+
     return (
       <form action="" onSubmit={this.onSubmit}>
         <FormControl fullWidth style={{ marginBottom: 20 }}>
@@ -68,7 +67,7 @@ export default class Twitter extends React.Component {
           )}
         </FormControl>
         <Button
-          disabled={isReachedLimit}
+          disabled={tweet.length === 0 || isReachedLimit}
           fullWidth
           color="primary"
           variant="raised"
