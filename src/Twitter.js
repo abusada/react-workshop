@@ -45,7 +45,10 @@ export default class Twitter extends React.Component {
     tweetsRef.orderByChild("timestamp").on("child_added", snapshopt => {
       this.setState(({ tweets }) => ({
         tweets: tweets
-          .concat(snapshopt.val())
+          .concat({
+            ...snapshopt.val(),
+            key: snapshopt.key
+          })
           .sort((prev, next) => prev.timestamp < next.timestamp)
       }));
     });

@@ -6,7 +6,7 @@ import { FormControl, FormLabel, FormControlLabel } from "material-ui/Form";
 import Radio, { RadioGroup } from "material-ui/Radio";
 import Paper from "material-ui/Paper";
 import { CircularProgress } from "material-ui/Progress";
-import Logo from './Logo';
+import { YamsaferLogo } from './Logo';
 
 const styles = theme => ({
   root: {
@@ -36,7 +36,7 @@ class InteractiveGrid extends React.Component {
             justify={"center"}
           >
             <Grid item>
-                <Logo callback={onAnimationComplete} />
+                <YamsaferLogo callback={onAnimationComplete} />
             </Grid>
           </Grid>
         </Grid>

@@ -1,14 +1,17 @@
 import React from "react";
 import Lottie from "react-lottie";
-import * as animationData from "./lottie.json";
 
-const AnimatedLogo = ({ callback }) => (
+import * as yamsaferAnimationData from "./yamsafer.json";
+import * as reactAnimationData from "./react.json";
+import * as hearAnimationData from "./heart.json";
+
+const AnimatedLogo = ({ callback, animationData, loop, autoplay, ...rest }) => (
   <div className="logo-dark">
     <Lottie
       options={{
-        loop: false,
-        autoplay: true,
-        animationData: animationData
+        loop,
+        autoplay,
+        animationData
       }}
       eventListeners={[
         {
@@ -16,13 +19,27 @@ const AnimatedLogo = ({ callback }) => (
           eventName: "complete"
         }
       ]}
-      height={160}
+      {...rest}
     />
   </div>
 );
 
 AnimatedLogo.defaultProps = {
-  callback() {}
+  callback() {},
+  loop: false,
+  autoplay: true,
+  speed: 1,
+  height: 160
 };
+
+export const YamsaferLogo = props => (
+  <AnimatedLogo animationData={yamsaferAnimationData} {...props} />
+);
+export const ReactLogo = props => (
+  <AnimatedLogo animationData={reactAnimationData} {...props} />
+);
+export const HeartLogo = props => (
+  <AnimatedLogo animationData={hearAnimationData} {...props} />
+);
 
 export default AnimatedLogo;
