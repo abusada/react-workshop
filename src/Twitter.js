@@ -4,7 +4,7 @@ import Tweet from "./Components/Tweet";
 import Paper from "material-ui/Paper";
 import Login from "./Components/Login";
 import LoadingScreen from "./Components/LoadingScreen";
-
+import moment from "moment";
 import firebase from "firebase";
 import { getCookie, setCookie } from "./api/cookies";
 import { LOGIN_COOKIE_NAME } from "./constatns";
@@ -42,9 +42,11 @@ export default class Twitter extends React.Component {
           });
     });
 
-    tweetsRef.on("child_added", data => {
+    tweetsRef.orderByChild("timestamp").on("child_added", snapshopt => {
       this.setState(({ tweets }) => ({
-        tweets: tweets.concat(data.val())
+        tweets: tweets
+          .concat(snapshopt.val())
+          .sort((prev, next) => prev.timestamp < next.timestamp)
       }));
     });
   }
@@ -57,9 +59,6 @@ export default class Twitter extends React.Component {
   };
   onTweet = tweet => {
     const { user: { uid, displayName, photoURL, email } } = this.state;
-    
-    console.log(this.state.user);
-
     const timestamp = new Date().getTime();
     firebase
       .database()
@@ -72,7 +71,7 @@ export default class Twitter extends React.Component {
           email,
           photoURL,
           displayName
-        },
+        }
       });
   };
   onLoadingScreenAnimationComplete = () => {
@@ -103,7 +102,7 @@ export default class Twitter extends React.Component {
         {status === "success" && (
           <div>
             <Input onTweet={this.onTweet} user={user} />
-            <hr />
+            <h3>Feed</h3>
             {this.state.tweets.map(tweet => <Tweet {...tweet} />)}
           </div>
         )}
