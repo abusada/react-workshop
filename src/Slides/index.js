@@ -6,6 +6,7 @@ import SlideContainer from "./Components/SlideContainer";
 import First from "./Intro_1";
 import Second from "./What_2";
 import Third from "./JsxAndBabel_3";
+import Fourth from "./Tweet_4";
 
 const styles = theme => ({
   root: {
@@ -22,10 +23,12 @@ const styles = theme => ({
 class Slides extends React.Component {
   render() {
     const { classes } = this.props;
+    const slides = [First, Second, Third, Fourth];
+    // const slides = [Fourth];
     return (
       <Grid container className={classes.root}>
         <Grid item xs>
-          {[First, Second, Third].map((Slide, index) => (
+          {slides.map((Slide, index) => (
             <SlideContainer key={index}>
               <Slide />
             </SlideContainer>

@@ -33,16 +33,14 @@ class RecipeReviewCard extends React.Component {
   render() {
     const { user, classes, children } = this.props;
     return (
-      <div>
-        <Card className={classes.card}>
-          <CardHeader
-            avatar={<Avatar className={classes.avatar} src={user.photoURL} />}
-            title={user.displayName}
-            subheader={user.email}
-          />
-          <CardContent>{children}</CardContent>
-        </Card>
-      </div>
+      <Card className={classes.card}>
+        <CardHeader
+          avatar={<Avatar className={classes.avatar} src={user.photoURL} />}
+          title={user.displayName}
+          subheader={user.email}
+        />
+        <CardContent>{children}</CardContent>
+      </Card>
     );
   }
 }

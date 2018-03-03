@@ -18,7 +18,7 @@ const styles = theme => ({
 
 class LoginScreen extends React.Component {
   login = () => {
-    const { onSignupSuccess, onSignupFailure } = this.props;
+    // const { onSignupSuccess, onSignupFailure } = this.props;
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()

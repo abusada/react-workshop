@@ -1,4 +1,5 @@
 import React from "react";
+import { FirebaseProvider } from "./Components/Firebase";
 import Feed from "./Components/Feed";
 import LoginScreen from "./Components/Login";
 import LoadingScreen from "./Components/LoadingScreen";
@@ -16,6 +17,8 @@ export default class Twitter extends React.Component {
   render() {
     const { animationReady } = this.state;
     return (
+
+  <FirebaseProvider key="app">
       <FirebaseConsumer>
         {({ user, status }) => (
           <div>
@@ -34,6 +37,7 @@ export default class Twitter extends React.Component {
           </div>
         )}
       </FirebaseConsumer>
+      </FirebaseProvider>
     );
   }
 }

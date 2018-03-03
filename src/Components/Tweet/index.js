@@ -28,43 +28,36 @@ const styles = theme => ({
   },
   expandOpen: {
     transform: "rotate(180deg)"
-  },
-  avatar: {
-    backgroundColor: red[500]
   }
 });
 
-class RecipeReviewCard extends React.Component {
+class TweetCard extends React.Component {
   render() {
     const { classes, timestamp, tweet, user } = this.props;
+    const avatar = (
+      <Avatar
+        src={user.photoURL}
+        aria-label="Recipe"
+        className={classes.avatar}
+      />
+    );
     return (
       <Card className={classes.card}>
         <CardHeader
-          avatar={
-            <Avatar
-              src={user.photoURL}
-              aria-label="Recipe"
-              className={classes.avatar}
-            />
-          }
+          avatar={avatar}
           title={user.displayName}
           subheader={<Timestamp time={timestamp} />}
         />
         <CardContent>
           <Typography component="p">{tweet}</Typography>
         </CardContent>
-        {/* <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-          </CardActions> */}
       </Card>
     );
   }
 }
 
-RecipeReviewCard.propTypes = {
+TweetCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(RecipeReviewCard);
+export default withStyles(styles)(TweetCard);
