@@ -1,10 +1,11 @@
 import React from "react";
-import Slider from "../Components/Slider";
-import Paper from "material-ui/Paper";
 import Grid from "material-ui/Grid";
 import { withStyles } from "material-ui/styles";
+import SlideContainer from "./Components/SlideContainer";
+
 import First from "./Intro_1";
 import Second from "./What_2";
+import Third from "./JsxAndBabel_3";
 
 const styles = theme => ({
   root: {
@@ -24,14 +25,10 @@ class Slides extends React.Component {
     return (
       <Grid container className={classes.root}>
         <Grid item xs>
-          {[First, Second].map((Slide, index) => (
-            <Paper key={index} elevation={4} className={classes.paper}>
-              <Grid container wrap="nowrap" className={classes.slideContainer}>
-                <Grid item xs>
-                  <Slide />
-                </Grid>
-              </Grid>
-            </Paper>
+          {[First, Second, Third].map((Slide, index) => (
+            <SlideContainer key={index}>
+              <Slide />
+            </SlideContainer>
           ))}
         </Grid>
       </Grid>

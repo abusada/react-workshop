@@ -1,12 +1,8 @@
 import React from "react";
-import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-
-import IconButton from "material-ui/IconButton";
 
 import Input, { InputLabel, InputAdornment } from "material-ui/Input";
 import { FormControl, FormHelperText } from "material-ui/Form";
-import VisibilityOff from "material-ui-icons/VisibilityOff";
 
 import { CircularProgress } from "material-ui/Progress";
 import Container from "./Container";

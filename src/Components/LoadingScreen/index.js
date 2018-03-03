@@ -2,11 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import Grid from "material-ui/Grid";
-import { FormControl, FormLabel, FormControlLabel } from "material-ui/Form";
-import Radio, { RadioGroup } from "material-ui/Radio";
-import Paper from "material-ui/Paper";
-import { CircularProgress } from "material-ui/Progress";
-import { YamsaferLogo } from './Logo';
+import { YamsaferLogo } from "../Logo";
 
 const styles = theme => ({
   root: {
@@ -18,14 +14,8 @@ const styles = theme => ({
 });
 
 class InteractiveGrid extends React.Component {
-  state = {
-    direction: "row",
-    justify: "center",
-    alignItems: "center"
-  };
   render() {
     const { classes, onAnimationComplete } = this.props;
-    const { alignItems, direction, justify } = this.state;
     return (
       <Grid container className={classes.root}>
         <Grid item xs={12}>
@@ -36,7 +26,7 @@ class InteractiveGrid extends React.Component {
             justify={"center"}
           >
             <Grid item>
-                <YamsaferLogo callback={onAnimationComplete} />
+              <YamsaferLogo callback={onAnimationComplete} />
             </Grid>
           </Grid>
         </Grid>

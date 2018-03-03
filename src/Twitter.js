@@ -1,115 +1,39 @@
 import React from "react";
-import Input from "./Components/Input";
-import Tweet from "./Components/Tweet";
-import Paper from "material-ui/Paper";
-import Login from "./Components/Login";
+import Feed from "./Components/Feed";
+import LoginScreen from "./Components/Login";
 import LoadingScreen from "./Components/LoadingScreen";
-import moment from "moment";
-import firebase from "firebase";
-import { getCookie, setCookie } from "./api/cookies";
-import { LOGIN_COOKIE_NAME } from "./constatns";
+import { FirebaseConsumer, statusTypes } from "./Components/Firebase";
 
-firebase.initializeApp({
-  apiKey: "AIzaSyB9J9uZRl1g1fRTFzm0DDQsDPyu90w3cLU",
-  authDomain: "react-workshop-3eb10.firebaseapp.com",
-  databaseURL: "https://react-workshop-3eb10.firebaseio.com",
-  projectId: "react-workshop-3eb10",
-  storageBucket: "react-workshop-3eb10.appspot.com",
-  messagingSenderId: "24400712690"
-});
-
-var database = firebase.database();
-const tweetsRef = firebase.database().ref("tweets");
 export default class Twitter extends React.Component {
-  constructor(props) {
-    super(props);
-    const cookie = getCookie(LOGIN_COOKIE_NAME);
-    this.state = {
-      tweets: [],
-      status: "pending",
-      animationCompleted: false
-    };
-  }
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      user
-        ? this.setState({
-            user,
-            status: "success"
-          })
-        : this.setState({
-            status: "failed"
-          });
-    });
-
-    tweetsRef.orderByChild("timestamp").on("child_added", snapshopt => {
-      this.setState(({ tweets }) => ({
-        tweets: tweets
-          .concat({
-            ...snapshopt.val(),
-            key: snapshopt.key
-          })
-          .sort((prev, next) => prev.timestamp < next.timestamp)
-      }));
-    });
-  }
-  onSignupFailure = error => {};
-  onSignupSuccess = result => {
-    const { credential: { accessToken }, user } = result;
-    this.setState({ user }, () => {
-      setCookie(LOGIN_COOKIE_NAME, accessToken);
-    });
-  };
-  onTweet = tweet => {
-    const { user: { uid, displayName, photoURL, email } } = this.state;
-    const timestamp = new Date().getTime();
-    firebase
-      .database()
-      .ref("tweets")
-      .push({
-        tweet,
-        timestamp,
-        user: {
-          uid,
-          email,
-          photoURL,
-          displayName
-        }
-      });
+  state = {
+    animationReady: false
   };
   onLoadingScreenAnimationComplete = () => {
     this.setState({
-      animationCompleted: true
+      animationReady: true
     });
   };
   render() {
-    const { status, user, animationCompleted } = this.state;
-    if (status === "pending" || !animationCompleted) {
-      return (
-        <LoadingScreen
-          onAnimationComplete={this.onLoadingScreenAnimationComplete}
-        />
-      );
-    }
-
+    const { animationReady } = this.state;
     return (
-      <section style={{ padding: 20 }}>
-        {status === "failed" && (
-          <Login
-            status={status}
-            firebase={firebase}
-            onSignupSuccess={this.onSignupSuccess}
-            onSignupFailure={this.onSignupFailure}
-          />
-        )}
-        {status === "success" && (
+      <FirebaseConsumer>
+        {({ user, status }) => (
           <div>
-            <Input onTweet={this.onTweet} user={user} />
-            <h3>Feed</h3>
-            {this.state.tweets.map(tweet => <Tweet {...tweet} />)}
+            {animationReady &&
+              status === statusTypes.IS_AUTHORIZED && <Feed user={user} />}
+
+            {status === statusTypes.IS_PENDING ||
+              (animationReady === false && (
+                <LoadingScreen
+                  onAnimationComplete={this.onLoadingScreenAnimationComplete}
+                />
+              ))}
+
+            {animationReady &&
+              status === statusTypes.IS_NOT_AUTHORIZED && <LoginScreen />}
           </div>
         )}
-      </section>
+      </FirebaseConsumer>
     );
   }
 }
