@@ -1,7 +1,7 @@
 import React from "react";
-
 // 1. import the Tweet component, path is relative
 import Tweet from "./Components/Tweet";
+import Input from "./Components/Input";
 
 // 2. Define the host component
 export default class Training extends React.Component {
@@ -17,7 +17,9 @@ export default class Training extends React.Component {
       }
     };
     return (
-      <section>
+      <section style={{ margin: 10, padding: 16 }}>
+        <Input />
+        <br />
         {/*  4. uset Tweet component inside the render method of the host component  */}
         <Tweet user={model.user} timestamp={model.time} text={model.text} />
       </section>

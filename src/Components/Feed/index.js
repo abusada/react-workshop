@@ -2,6 +2,7 @@ import React from "react";
 import firebase from "firebase";
 import Tweet from "../Tweet";
 import Input from "../Input";
+import moment from "moment";
 
 const tweetsRef = firebase.database().ref("tweets");
 
@@ -10,33 +11,31 @@ class Feed extends React.Component {
     tweets: []
   };
   componentDidMount() {
-    tweetsRef.orderByChild("timestamp").on("child_added", snapshopt => {
+    tweetsRef.on("child_added", snapshopt => {
       this.setState(({ tweets }) => ({
         tweets: tweets
-          .concat({
-            ...snapshopt.val(),
-            key: snapshopt.key
-          })
-          .sort((prev, next) => prev.timestamp < next.timestamp)
+          .concat(snapshopt.val())
+          .sort((prev, current) => current.timestamp - prev.timestamp)
       }));
     });
   }
   onTweet = tweet => {
     const { user: { uid, displayName, photoURL, email } } = this.props;
     const timestamp = new Date().getTime();
+    const model =  {
+      tweet,
+      timestamp,
+      user: {
+        uid,
+        email,
+        photoURL,
+        displayName
+      }
+    }
     firebase
       .database()
       .ref("tweets")
-      .push({
-        tweet,
-        timestamp,
-        user: {
-          uid,
-          email,
-          photoURL,
-          displayName
-        }
-      });
+      .push();
   };
   render() {
     const { user } = this.props;
@@ -44,7 +43,7 @@ class Feed extends React.Component {
     return (
       <section>
         <Input onTweet={this.onTweet} user={user} />
-        {tweets.map(tweet => <Tweet {...tweet} />)}
+        {tweets.map((tweet, index) => <Tweet key={index} {...tweet} />)}
       </section>
     );
   }

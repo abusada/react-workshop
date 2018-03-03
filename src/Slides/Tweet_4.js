@@ -9,7 +9,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/styles/hljs";
 
 const ItemBreakdown = ({ item, code }) => (
-  <Grid container alignItems={"center"} justify={"start"}>
+  <Grid container alignItems={"center"} justify={"flex-start"}>
     <Grid item xs={12} sm={6}>
       <SyntaxHighlighter language="jsx" style={docco}>
         {code}
@@ -92,12 +92,7 @@ export default class BuildingTheTweetComponent extends React.Component {
 </CardContent>`}
           />
           <ItemBreakdown
-            item={
-              <Card fullWidth style={{ padding: 10 }}>
-                {" "}
-                Card ......{" "}
-              </Card>
-            }
+            item={<Card style={{ padding: 10 }}> Card ...... </Card>}
             code={`<Card>Card ......</Card>`}
           />
           <ItemBreakdown

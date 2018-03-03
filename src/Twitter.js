@@ -17,26 +17,25 @@ export default class Twitter extends React.Component {
   render() {
     const { animationReady } = this.state;
     return (
+      <FirebaseProvider key="app">
+        <FirebaseConsumer>
+          {({ user, status }) => (
+            <div>
+              {animationReady &&
+                status === statusTypes.IS_AUTHORIZED && <Feed user={user} />}
 
-  <FirebaseProvider key="app">
-      <FirebaseConsumer>
-        {({ user, status }) => (
-          <div>
-            {animationReady &&
-              status === statusTypes.IS_AUTHORIZED && <Feed user={user} />}
+              {status === statusTypes.IS_PENDING ||
+                (animationReady === false && (
+                  <LoadingScreen
+                    onAnimationComplete={this.onLoadingScreenAnimationComplete}
+                  />
+                ))}
 
-            {status === statusTypes.IS_PENDING ||
-              (animationReady === false && (
-                <LoadingScreen
-                  onAnimationComplete={this.onLoadingScreenAnimationComplete}
-                />
-              ))}
-
-            {animationReady &&
-              status === statusTypes.IS_NOT_AUTHORIZED && <LoginScreen />}
-          </div>
-        )}
-      </FirebaseConsumer>
+              {animationReady &&
+                status === statusTypes.IS_NOT_AUTHORIZED && <LoginScreen />}
+            </div>
+          )}
+        </FirebaseConsumer>
       </FirebaseProvider>
     );
   }
