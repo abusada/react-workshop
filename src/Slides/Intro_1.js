@@ -9,7 +9,7 @@ function Intro(props) {
       container
       justify={"center"}
       alignItems={"center"}
-      style={{ height: "100vh", textAlign: "center" }}
+      style={{ textAlign: "center" }}
     >
       <Grid item xs>
         <Grid container justify={"center"} alignItems={"center"}>

@@ -8,25 +8,12 @@ import Second from "./What_2";
 import Third from "./JsxAndBabel_3";
 import Fourth from "./Tweet_4";
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    height: `calc(100vh - ${theme.spacing.unit * 3}px)`,
-    margin: theme.spacing.unit,
-    padding: theme.spacing.unit * 2,
-    overflow: "hidden"
-  }
-});
-
 class Slides extends React.Component {
   render() {
-    const { classes } = this.props;
     const slides = [First, Second, Third, Fourth];
     // const slides = [Fourth];
     return (
-      <Grid container className={classes.root}>
+      <Grid container direction="column" alignItems={"stretch"}>
         <Grid item xs>
           {slides.map((Slide, index) => (
             <SlideContainer key={index}>
@@ -39,4 +26,4 @@ class Slides extends React.Component {
   }
 }
 
-export default withStyles(styles)(Slides);
+export default Slides;

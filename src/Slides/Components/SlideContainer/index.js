@@ -8,21 +8,21 @@ const styles = theme => ({
     flexGrow: 1
   },
   paper: {
-    minHeight: `calc(100vh - ${theme.spacing.unit * 3}px)`,
+    overflow: "hidden",
     margin: theme.spacing.unit,
-    padding: theme.spacing.unit * 2,
-    overflow: "hidden"
+    padding: theme.spacing.unit * 4,
+    minHeight: `calc(100vh - ${theme.spacing.unit * 2}px)`
   }
 });
 
 const SlideContaienr = ({ children, classes }) => (
-  <Paper elevation={4} className={classes.paper}>
-    <Grid container wrap="nowrap" className={classes.slideContainer}>
-      <Grid item xs>
+  <Grid container>
+    <Grid item xs>
+      <Paper elevation={4} className={classes.paper}>
         {children}
-      </Grid>
+      </Paper>
     </Grid>
-  </Paper>
+  </Grid>
 );
 
 export default withStyles(styles)(SlideContaienr);

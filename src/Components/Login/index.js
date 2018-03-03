@@ -4,8 +4,8 @@ import { withStyles } from "material-ui/styles";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
-import firebase from 'firebase';
-
+import firebase from "firebase";
+import Grid from "material-ui/Grid";
 const styles = theme => ({
   paper: {
     position: "absolute",
@@ -20,21 +20,29 @@ class LoginScreen extends React.Component {
   login = () => {
     // const { onSignupSuccess, onSignupFailure } = this.props;
     var provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      // .then(onSignupSuccess)
-      // .catch(onSignupFailure);
+    firebase.auth().signInWithPopup(provider);
+    // .then(onSignupSuccess)
+    // .catch(onSignupFailure);
   };
   render() {
     return (
-      <Paper style={{ textAlign: "center", padding: 20 }}>
-        <Typography variant="headline" component="h3">
-          You need to login
-        </Typography>
-        <Button color="white" variant="raised" onClick={this.login}>
-          Login with Google
-        </Button>
+      <Paper>
+        <Grid
+          style={{ height: "100vh" }}
+          container
+          direction="column"
+          justify={"center"}
+          alignItems={"center"}
+        >
+          <Button
+            size="large"
+            color="primary"
+            variant="raised"
+            onClick={this.login}
+          >
+            Login with Google
+          </Button>
+        </Grid>
       </Paper>
     );
   }

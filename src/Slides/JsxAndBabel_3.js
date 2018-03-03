@@ -16,6 +16,11 @@ function JsxAndBabel(props) {
           <a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a>{" "}
           produces React “elements” as javascript.
         </Typography>
+        <Typography>
+          Add a breif about javascript history, es5, es6, how new features make
+          it to the language &nbsp;
+          <a href="https://github.com/tc39/proposals">proopsals</a>
+        </Typography>
       </Grid>
       <Grid item xs={12} sm={6}>
         <SyntaxHighlighter language="javascript" style={docco}>

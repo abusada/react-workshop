@@ -7,14 +7,9 @@ import FinalResult from "../Twitter";
 
 function WhatWillWeDo(props) {
   return (
-    <Grid container>
-      <Grid item xs={12} sm={4}>
-        <section style={{ overflow: "hidden", maxHeight: "90vh" }}>
-          <FinalResult />
-        </section>
-      </Grid>
+    <Grid container spacing={40}>
       <Grid item xs={12} sm={8}>
-        <Typography gutterBottom variant="title">
+        <Typography gutterBottom variant="display1">
           What we're building?
         </Typography>
         <Typography gutterBottom>
@@ -25,8 +20,7 @@ function WhatWillWeDo(props) {
         </Typography>
         <Typography gutterBottom />
         <br />
-
-        <Typography gutterBottom variant="title">
+        <Typography gutterBottom variant="display1">
           How to follow along?
         </Typography>
         <Typography gutterBottom>
@@ -36,7 +30,7 @@ function WhatWillWeDo(props) {
           what you feel comfortable with.
         </Typography>
         <br />
-        <Typography gutterBottom variant="subheading">
+        <Typography gutterBottom variant="title">
           If You Prefer to Write Code in the Browser
         </Typography>
         <Typography gutterBottom>
@@ -50,22 +44,14 @@ function WhatWillWeDo(props) {
           </a>{" "}
           &nbsp; And you're all set to start writing code 👍
         </Typography>
-        <Typography gutterBottom>
-          If you would like to write code on your machine, also open the{" "}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://codesandbox.io/s/github/abusada/react-workshop"
-          >
-            Link
-          </a>{" "}
-          and download the project code 😜
-        </Typography>
-        <Typography gutterBottom>
-          Unzip the project, open your terminal to the dowload directory
+        <br />
+        <Typography gutterBottom variant="title">
+          If You Prefer to Write Code on your machine{" "}
+          <small>(not recommended for today 😅)</small>
         </Typography>
         <SyntaxHighlighter language="bash" style={dark}>
-          {`cd yamsafer-month-react-workshop
+          {`git clone git@github.com:abusada/react-workshop.git
+cd react-workshop
 npm install
 npm start`}
         </SyntaxHighlighter>
@@ -76,6 +62,11 @@ npm start`}
             🎉
           </span>
         </Typography>
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <section style={{ overflowY: "visible", maxHeight: "90vh" }}>
+          <FinalResult />
+        </section>
       </Grid>
     </Grid>
   );

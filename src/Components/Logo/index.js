@@ -5,8 +5,15 @@ import * as yamsaferAnimationData from "./yamsafer.json";
 import * as reactAnimationData from "./react.json";
 import * as hearAnimationData from "./heart.json";
 
-const AnimatedLogo = ({ callback, animationData, loop, autoplay, ...rest }) => (
-  <div className="logo-dark">
+const AnimatedLogo = ({
+  callback,
+  animationData,
+  loop,
+  autoplay,
+  classes,
+  ...rest
+}) => (
+  <div className={classes}>
     <Lottie
       options={{
         loop,
@@ -33,7 +40,11 @@ AnimatedLogo.defaultProps = {
 };
 
 export const YamsaferLogo = props => (
-  <AnimatedLogo animationData={yamsaferAnimationData} {...props} />
+  <AnimatedLogo
+    classes={"logo-dark"}
+    animationData={yamsaferAnimationData}
+    {...props}
+  />
 );
 export const ReactLogo = props => (
   <AnimatedLogo animationData={reactAnimationData} {...props} />

@@ -35,7 +35,7 @@ class Feed extends React.Component {
     firebase
       .database()
       .ref("tweets")
-      .push();
+      .push(model);
   };
   render() {
     const { user } = this.props;
