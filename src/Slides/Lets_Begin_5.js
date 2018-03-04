@@ -17,7 +17,7 @@ function Intro(props) {
         <Grid container>
           <Grid item xs={12}>
             <Typography variant="display2" style={{ position: "relative" }}>
-              <Link to="/training">
+              <Link to="/">
                 <Button size="large" variant="raised" color="primary">
                   Let's Begin
                 </Button>

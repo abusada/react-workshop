@@ -3,7 +3,7 @@ import Typography from "material-ui/Typography";
 import Grid from "material-ui/Grid";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { dark } from "react-syntax-highlighter/styles/hljs";
-import FinalResult from "../Twitter";
+import FinalResult from "../App";
 
 function WhatWillWeDo(props) {
   return (
