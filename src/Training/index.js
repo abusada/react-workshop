@@ -1,31 +1,60 @@
 import React from "react";
 import Grid from "material-ui/Grid";
-// 1. import the Tweet component, path is relative
+import firebase from "firebase";
 import Tweet from "./Components/Tweet";
 import Input from "./Components/Input";
 
-// 2. Define the host component
+var database = firebase.database();
+
 export default class Training extends React.Component {
-  render() {
-    // 3. Define data
+  state = {
+    tweets: []
+  };
+  componentDidMount() {
+    const tweetsRef = firebase.database().ref("tweets");
+    tweetsRef.on("child_added", snapshot => {
+      this.setState(({ tweets }) => ({
+        tweets: tweets.concat(snapshot.val())
+      }));
+    });
+  }
+  onTweet = tweet => {
+    const timestamp = new Date().getTime();
+
     const model = {
-      time: new Date().getTime(),
-      text: "Welcome to Yamsafer Month - React Training",
+      tweet,
+      timestamp,
       user: {
-        displayName: "Moja Dameri",
+        uid: 0,
+        email: "email@bzy.edu",
         photoURL:
-          "https://scontent.ftlv3-1.fna.fbcdn.net/v/t1.0-1/p320x320/27751557_2161231387496873_6385839033479938157_n.jpg?oh=32a7df58d62d17727a0482d05763b685&oe=5B4B5F4F"
+          "https://lh3.googleusercontent.com/-JmUb9YMSjfY/AAAAAAAAAAI/AAAAAAAAABA/6ObgLwbcvo8/photo.jpg",
+        displayName: "Mohammad Mousa"
       }
     };
+
+    firebase
+      .database()
+      .ref("tweets")
+      .push(model);
+  };
+  render() {
+    const { tweets } = this.state;
     return (
       <Grid container>
         <Grid item xs={12} sm={4} md={3} />
         <Grid item xs={12} sm={4} md={6}>
           <div style={{ padding: 20 }}>
-            <Input />
+            <Input
+              onTweet={this.onTweet}
+              placeholder={" Placeholder coming from the outside "}
+            />
             <hr />
-            {/*  4. uset Tweet component inside the render method of the host component  */}
-            <Tweet user={model.user} timestamp={model.time} text={model.text} />
+
+            {tweets.map(item => (
+              <Tweet user={item.user} timestamp={item.timestamp} text={item.tweet} />
+            ))}
+
           </div>
         </Grid>
       </Grid>

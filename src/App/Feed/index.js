@@ -16,7 +16,6 @@ class Feed extends React.Component {
       this.setState(({ tweets }) => ({
         tweets: tweets
           .concat(snapshopt.val())
-          .sort((prev, current) => current.timestamp - prev.timestamp)
       }));
     });
   }
