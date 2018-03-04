@@ -17,11 +17,14 @@ function Intro(props) {
         <Grid container>
           <Grid item xs={12}>
             <Typography variant="display2" style={{ position: "relative" }}>
-              <Link to="/">
+              <a
+                target="_blank"
+                href="https://codesandbox.io/s/github/abusada/react-workshop"
+              >
                 <Button size="large" variant="raised" color="primary">
                   Let's Begin
                 </Button>
-              </Link>
+              </a>
             </Typography>
           </Grid>
         </Grid>
