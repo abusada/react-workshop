@@ -4,6 +4,7 @@ import Lottie from "react-lottie";
 import * as yamsaferAnimationData from "./yamsafer.json";
 import * as reactAnimationData from "./react.json";
 import * as hearAnimationData from "./heart.json";
+import * as circleAnimationData from "./circle.json";
 
 const AnimatedLogo = ({
   callback,
@@ -51,6 +52,10 @@ export const ReactLogo = props => (
 );
 export const HeartLogo = props => (
   <AnimatedLogo animationData={hearAnimationData} {...props} />
+);
+
+export const CircleGrow = props => (
+  <AnimatedLogo animationData={circleAnimationData} {...props} />
 );
 
 export default AnimatedLogo;

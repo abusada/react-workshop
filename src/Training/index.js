@@ -1,4 +1,5 @@
 import React from "react";
+import Grid from "material-ui/Grid";
 // 1. import the Tweet component, path is relative
 import Tweet from "./Components/Tweet";
 import Input from "./Components/Input";
@@ -17,12 +18,17 @@ export default class Training extends React.Component {
       }
     };
     return (
-      <section style={{ margin: 10, padding: 16 }}>
-        <Input />
-        <br />
-        {/*  4. uset Tweet component inside the render method of the host component  */}
-        <Tweet user={model.user} timestamp={model.time} text={model.text} />
-      </section>
+      <Grid container>
+        <Grid item xs={12} sm={4} md={3} />
+        <Grid item xs={12} sm={4} md={6}>
+          <div style={{ padding: 20 }}>
+            <Input />
+            <hr />
+            {/*  4. uset Tweet component inside the render method of the host component  */}
+            <Tweet user={model.user} timestamp={model.time} text={model.text} />
+          </div>
+        </Grid>
+      </Grid>
     );
   }
 }
