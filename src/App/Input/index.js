@@ -6,6 +6,7 @@ import { FormControl, FormHelperText } from "material-ui/Form";
 
 import { CircularProgress } from "material-ui/Progress";
 import Container from "./Container";
+import blue from 'material-ui/colors/blue';
 
 export default class Twitter extends React.Component {
   static defaultProps = {
@@ -67,7 +68,6 @@ export default class Twitter extends React.Component {
           <Button
             disabled={tweet.length === 0 || isReachedLimit}
             fullWidth
-            color="primary"
             variant="raised"
             type="submit"
           >

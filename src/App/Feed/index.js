@@ -10,6 +10,7 @@ class Feed extends React.Component {
   state = {
     tweets: []
   };
+
   componentDidMount() {
     tweetsRef.on("child_added", snapshopt => {
       this.setState(({ tweets }) => ({
@@ -19,6 +20,7 @@ class Feed extends React.Component {
       }));
     });
   }
+  
   onTweet = tweet => {
     const { user: { uid, displayName, photoURL, email } } = this.props;
     const timestamp = new Date().getTime();

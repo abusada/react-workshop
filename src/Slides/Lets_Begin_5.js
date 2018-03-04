@@ -1,5 +1,5 @@
 import React from "react";
-import { YamsaferLogo, ReactLogo, HeartLogo } from "../Components/Logo";
+import { YamsaferLogo, ReactLogo, HeartLogo } from "../App/Logo";
 import Grid from "material-ui/Grid";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";

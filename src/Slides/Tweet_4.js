@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "material-ui/Grid";
 import Typography from "material-ui/Typography";
-import Tweet from "../Components/Tweet";
+import Tweet from "../App/Tweet";
 import Paper from "material-ui/Paper";
 import Avatar from "material-ui/Avatar";
 import Card, { CardHeader, CardContent } from "material-ui/Card";
