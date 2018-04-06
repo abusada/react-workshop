@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "material-ui/Grid";
 import firebase from "firebase";
 import Tweet from "./Components/Tweet";
-import Input from "./Components/Input";
+import Form from "./Components/Form";
 
 var database = firebase.database();
 
@@ -40,21 +40,31 @@ export default class Training extends React.Component {
   };
   render() {
     const { tweets } = this.state;
+
+    const fakeTweet = {
+      tweet: "Hello Nablus, my name is Faris, i'm a frontend engineer at yamsafer",
+      timestamp: new Date().getTime(),
+      user: {
+        uid: 0,
+        email: "email@ayIshi.edu",
+        photoURL:
+          "https://lh3.googleusercontent.com/-JmUb9YMSjfY/AAAAAAAAAAI/AAAAAAAAABA/6ObgLwbcvo8/photo.jpg",
+        displayName: "Faris Abusada"
+      }
+    };
+
     return (
       <Grid container>
         <Grid item xs={12} sm={4} md={3} />
         <Grid item xs={12} sm={4} md={6}>
           <div style={{ padding: 20 }}>
-            <Input
-              onTweet={this.onTweet}
-              placeholder={" Placeholder coming from the outside "}
-            />
+            <Form />
             <hr />
-
-            {tweets.map(item => (
-              <Tweet user={item.user} timestamp={item.timestamp} text={item.tweet} />
-            ))}
-
+            <Tweet
+              user={fakeTweet.user}
+              text={fakeTweet.tweet}
+              timestamp={fakeTweet.timestamp}
+            />
           </div>
         </Grid>
       </Grid>
