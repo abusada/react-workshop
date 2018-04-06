@@ -65,7 +65,7 @@ function WhatWillWeDo(props) {
       </Grid>
       <Grid item xs={12} sm={4}>
         <section style={{ overflowY: "visible", maxHeight: "90vh" }}>
-          {/* <FinalResult /> */}
+          <FinalResult />
         </section>
       </Grid>
     </Grid>
