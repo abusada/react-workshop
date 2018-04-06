@@ -6,6 +6,7 @@ import Reboot from "material-ui/Reboot";
 import Final from "./App/Page";
 import Slides from "./Slides";
 import Training from "./Training";
+
 const App = () => [
   <Reboot key="reboot" />,
   <BrowserRouter key="app">
